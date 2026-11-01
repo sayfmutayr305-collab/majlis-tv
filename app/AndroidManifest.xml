@@ -54,12 +54,12 @@
         android:allowBackup="false"
         android:usesCleartextTraffic="false">
 
-        <!-- The app's icon opens the settings (switch between Majlis and the original home screen). -->
+        <!-- Separate app-drawer entry for settings; the main Majlis icon opens the dashboard. -->
         <activity
             android:name=".SettingsActivity"
             android:process=":home"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/settings_app_name"
             android:launchMode="singleTask"
             android:taskAffinity="io.freemytv.settings"
             android:excludeFromRecents="true"
@@ -73,8 +73,7 @@
             </intent-filter>
         </activity>
 
-        <!-- The home screen. Its own process (:home): if it ever crashes, the safety net in the main process still
-             works. It only becomes the TV's home screen in Majlis mode (cmd package set-home-activity). -->
+        <!-- The dashboard is also a normal app entry point; it does not become the system Home by itself. -->
         <activity
             android:name=".HomeActivity"
             android:process=":home"
@@ -93,6 +92,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
